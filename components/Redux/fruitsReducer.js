@@ -1,4 +1,8 @@
-import {ADD_FRUITS_INTO_LIST, ON_CHANGE_TEXT_VALUE} from './actions';
+import {
+  ADD_FRUITS_INTO_LIST,
+  ON_CHANGE_TEXT_VALUE,
+  ON_DELETE_FRUIT_ITEM,
+} from './actions';
 
 const initialfruitsState = {
   fruitsList: [{fruitName: '', fruitPrice: '', fruitQuantity: ''}],
@@ -24,6 +28,12 @@ const fruitsReducer = (state = initialfruitsState, action) => {
         },
       );
       return {...state, fruitsList: afterChangeValuesFruitsList};
+    }
+    case ON_DELETE_FRUIT_ITEM: {
+      const afterDeleteItemFromFruitsList = state.fruitsList.filter(
+        (_, index) => index !== action.payload,
+      );
+      return {...state, fruitsList: afterDeleteItemFromFruitsList};
     }
     default:
       return state;

@@ -5,6 +5,7 @@ export const UPDATE_TODO = 'UPDATE_TODO';
 export const SEARCH_TODO = 'SEARCH_TODO';
 export const ADD_FRUITS_INTO_LIST = 'ADD_FRUITS_INTO_LIST';
 export const ON_CHANGE_TEXT_VALUE = 'ON_CHANGE_TEXT_VALUE';
+export const ON_DELETE_FRUIT_ITEM = 'ON_DELETE_FRUIT_ITEM';
 
 export const addTodoAction = todo => {
   return {
@@ -54,5 +55,12 @@ export const onChangeTextValueAction = values => {
   return {
     type: ON_CHANGE_TEXT_VALUE,
     payload: values,
+  };
+};
+
+export const deleteFruitItemAction = id => {
+  return {
+    type: ON_DELETE_FRUIT_ITEM,
+    payload: id,
   };
 };

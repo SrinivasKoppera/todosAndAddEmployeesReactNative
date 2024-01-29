@@ -9,7 +9,11 @@ import {
 } from 'react-native';
 import {Button, Card, TextInput} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
-import {addFruitsAction, onChangeTextValueAction} from '../Redux/actions';
+import {
+  addFruitsAction,
+  onChangeTextValueAction,
+  deleteFruitItemAction,
+} from '../Redux/actions';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -27,6 +31,10 @@ const ProfileScreen = () => {
         fieldIndex: index,
       }),
     );
+  };
+
+  const onDeleteItemFromFruitsList = id => {
+    dispatch(deleteFruitItemAction(id));
   };
 
   const addInputFieldsFunction = ({item, index}) => {
@@ -78,12 +86,28 @@ const ProfileScreen = () => {
           />
         </Card>
         {length - 1 === index ? (
-          <Button
-            style={styles.addItemBtnStyles}
-            mode="contained"
-            onPress={() => addItemFunction()}>
-            Add Item
-          </Button>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Button
+              buttonColor="transparent"
+              textColor="red"
+              icon="delete"
+              mode="outlined"
+              onPress={() => onDeleteItemFromFruitsList(index)}>
+              DELETE
+            </Button>
+            <Button
+              style={styles.addItemBtnStyles}
+              mode="contained"
+              onPress={() => addItemFunction()}>
+              Add Item
+            </Button>
+          </View>
         ) : null}
       </View>
     );
