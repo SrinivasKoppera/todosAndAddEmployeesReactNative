@@ -19,7 +19,7 @@ const todosReducer = (state = initialState, action) => {
         eachTodo => eachTodo.title === action.payload.title,
       );
       //
-      if (isExits === undefined) {
+      if (!isExits) {
         return {
           ...state,
           todos: [...state.todos, action.payload],
@@ -30,17 +30,12 @@ const todosReducer = (state = initialState, action) => {
     }
     case DELETE_TODO: {
       const deleteId = action.payload;
-      const updateTodos = state.todos.filter(
-        (todo, index) => index !== deleteId,
-      );
+      const updateTodos = state.todos.filter((_, index) => index !== deleteId);
       return {...state, todos: updateTodos};
     }
     case GET_SINGLE_TODO: {
       const editTodoId = action.payload;
-      const editTodo = state.todos.find(
-        (eachTodo, index) => index === editTodoId,
-      );
-      // console.log('This is from Reducer: ', editTodo);
+      const editTodo = state.todos.find((_, index) => index === editTodoId);
       return {
         ...state,
         singleTodo: {
@@ -71,7 +66,7 @@ const todosReducer = (state = initialState, action) => {
       const filteredTodos = state.todos.filter(todos =>
         todos.title.includes(action.payload),
       );
-      console.log('This is from Reducer : ', action.payload);
+      // console.log('This is from Reducer : ', action.payload);
       return {...state, filteredList: filteredTodos};
     }
     default:

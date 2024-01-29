@@ -58,12 +58,19 @@ export const BottomTabs = () => {
           } else if (route.name === 'CHAT') {
             iconName = 'chat';
           }
-          const iconSize = size + 12;
-          return <MaterialIcon name={iconName} size={iconSize} color={color} />;
+          const iconSize = size + 10;
+          return (
+            <MaterialIcon
+              style={{marginBottom: -10}}
+              name={iconName}
+              size={iconSize}
+              color={color}
+            />
+          );
         },
         tabBarActiveTintColor: '#FF5733',
         tabBarInactiveTintColor: 'gray',
-        tabBarStyle: {height: 80},
+        tabBarStyle: {height: 100},
         tabBarHideOnKeyboard: true,
         unmountOnBlur: true,
       })}>
@@ -77,17 +84,42 @@ export const BottomTabs = () => {
               padding: 8,
               fontSize: 16,
               fontWeight: '600',
+              // backgroundColor: 'green',
+              margin: 0,
+              padding: 0,
+              paddingBottom: 8,
               // Add other common styles here
             };
 
             if (focused) {
-              // Apply additional styles when tab is focused
-              labelStyle.borderBottomWidth = 5;
-              labelStyle.borderColor = '#FF5733';
-              labelStyle.borderTopLeftRadius = 10;
               labelStyle.color = '#FF5733';
             }
-            return <Text style={labelStyle}>HOME</Text>;
+
+            return (
+              <>
+                <Text style={labelStyle}>Home</Text>
+                <View
+                  style={[
+                    focused
+                      ? {
+                          borderTopRightRadius: 10,
+                          borderTopLeftRadius: 10,
+                          borderColor: 'red',
+                          height: 10,
+                          width: 80,
+                          borderTopWidth: 8,
+                        }
+                      : {
+                          borderTopRightRadius: 10,
+                          borderTopLeftRadius: 10,
+                          borderColor: '#fff',
+                          height: 10,
+                          width: 60,
+                          borderTopWidth: 8,
+                        },
+                  ]}></View>
+              </>
+            );
           },
         }}
       />
@@ -102,16 +134,40 @@ export const BottomTabs = () => {
               fontSize: 16,
               fontWeight: '600',
               // Add other common styles here
+              margin: 0,
+              padding: 0,
+              paddingBottom: 8,
             };
 
             if (focused) {
               // Apply additional styles when tab is focused
-              labelStyle.borderBottomWidth = 5;
-              labelStyle.borderColor = '#FF5733';
-              labelStyle.borderTopLeftRadius = 10;
               labelStyle.color = '#FF5733';
             }
-            return <Text style={labelStyle}>CHAT</Text>;
+            return (
+              <>
+                <Text style={labelStyle}>Chat</Text>
+                <View
+                  style={[
+                    focused
+                      ? {
+                          borderTopRightRadius: 10,
+                          borderTopLeftRadius: 10,
+                          borderColor: 'red',
+                          height: 10,
+                          width: 80,
+                          borderTopWidth: 8,
+                        }
+                      : {
+                          borderTopRightRadius: 10,
+                          borderTopLeftRadius: 10,
+                          borderColor: '#fff',
+                          height: 10,
+                          width: 60,
+                          borderTopWidth: 8,
+                        },
+                  ]}></View>
+              </>
+            );
           },
         }}
       />
@@ -126,16 +182,40 @@ export const BottomTabs = () => {
               fontSize: 16,
               fontWeight: '600',
               // Add other common styles here
+              margin: 0,
+              padding: 0,
+              paddingBottom: 8,
             };
 
             if (focused) {
               // Apply additional styles when tab is focused
-              labelStyle.borderBottomWidth = 5;
-              labelStyle.borderColor = '#FF5733';
-              labelStyle.borderTopLeftRadius = 10;
               labelStyle.color = '#FF5733';
             }
-            return <Text style={labelStyle}>MAPS</Text>;
+            return (
+              <>
+                <Text style={labelStyle}>Maps</Text>
+                <View
+                  style={[
+                    focused
+                      ? {
+                          borderTopRightRadius: 10,
+                          borderTopLeftRadius: 10,
+                          borderColor: 'red',
+                          height: 10,
+                          width: 80,
+                          borderTopWidth: 8,
+                        }
+                      : {
+                          borderTopRightRadius: 10,
+                          borderTopLeftRadius: 10,
+                          borderColor: '#fff',
+                          height: 10,
+                          width: 60,
+                          borderTopWidth: 8,
+                        },
+                  ]}></View>
+              </>
+            );
           },
         }}
       />
@@ -150,15 +230,39 @@ export const BottomTabs = () => {
               fontSize: 16,
               fontWeight: '600',
               // Add other common styles here
+              margin: 0,
+              padding: 0,
+              paddingBottom: 8,
             };
             if (focused) {
               // Apply additional styles when tab is focused
-              labelStyle.borderBottomWidth = 5;
-              labelStyle.borderColor = '#FF5733';
-              labelStyle.borderTopLeftRadius = 50;
               labelStyle.color = '#FF5733';
             }
-            return <Text style={labelStyle}>PROFILE</Text>;
+            return (
+              <>
+                <Text style={labelStyle}>Profile</Text>
+                <View
+                  style={[
+                    focused
+                      ? {
+                          borderTopRightRadius: 10,
+                          borderTopLeftRadius: 10,
+                          borderColor: 'red',
+                          height: 10,
+                          width: 80,
+                          borderTopWidth: 8,
+                        }
+                      : {
+                          borderTopRightRadius: 10,
+                          borderTopLeftRadius: 10,
+                          borderColor: '#fff',
+                          height: 10,
+                          width: 60,
+                          borderTopWidth: 8,
+                        },
+                  ]}></View>
+              </>
+            );
           },
         }}
       />

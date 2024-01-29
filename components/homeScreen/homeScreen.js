@@ -22,7 +22,6 @@ import {
   searchTodoAction,
 } from '../Redux/actions';
 import EditIcon from 'react-native-vector-icons/AntDesign';
-// import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 const HomeScreen = () => {
@@ -30,18 +29,19 @@ const HomeScreen = () => {
   const [date, setDate] = useState(new Date());
   const [title, setTitle] = useState('');
   const [todo, setTodo] = useState('');
-  // const [todoState, updateTodoState] = useState({
-  //   title: '',
-  //   todo: '',
-  //   date: new Date(),
-  // });
+  const [searchedValue, setSearchedValue] = useState('');
+
   const [showDateTimePicker, updateShowDateTimePicker] = useState(false);
-  // const [todosListState, updateTodosListState] = useState([]);
-  const todosListState = useSelector(state => state.filteredList);
+
+  let filteredSearchList = useSelector(state => state.todosList.filteredList);
   const actionSheetRef = useRef();
   let todosList = useSelector(state => state.todosList.todos);
   const singleTodoObj = useSelector(state => state.todosList.singleTodo);
-  // console.log('This is TodosList Todo: ', todosList);
+
+  const renderMainList =
+    filteredSearchList.length === 0 ? todosList : filteredSearchList;
+
+  // console.log('This is Main Screen main list :', renderMainList);
 
   const onChangeTitleValue = title => {
     setTitle(title);
@@ -59,7 +59,9 @@ const HomeScreen = () => {
       } else {
         dispatch(addTodoAction(todoState));
       }
-      // updateTodoState({title: '', todo: ''});
+      setTitle('');
+      setTodo('');
+      setDate(new Date());
       actionSheetRef.current?.hide();
     } else {
       Alert.alert('Please Enter Todo Details');
@@ -72,22 +74,23 @@ const HomeScreen = () => {
 
   useEffect(() => {
     // updateTodoState(singleTodoObj);
-  }, [singleTodoObj]);
+    dispatch(searchTodoAction(searchedValue));
+  }, [searchedValue, dispatch]);
 
   const serachTodobyTitle = text => {
-    // if (text.trim() === '') {
-    //   updateTodosListState([]);
-    // } else {
-    //   const filteredTodosList = todosList.filter(todo =>
-    //     todo.title.includes(text),
-    //   );
-    //   updateTodosListState(filteredTodosList);
-    // }
-    dispatch(searchTodoAction(text));
+    if (text.trim() === '') {
+      filteredSearchList = [];
+    }
+    setSearchedValue(text);
   };
 
   const getSingleTodo = id => {
+    // const modifiedDate = singleTodoObj.date.toLocaleDateString();
+    console.log(singleTodoObj);
     dispatch(getSingleTodoAction(id));
+    setTitle(singleTodoObj.title);
+    setTodo(singleTodoObj.todo);
+    // setDate(modifiedDate);
     actionSheetRef.current?.show();
   };
 
@@ -131,8 +134,10 @@ const HomeScreen = () => {
         <TextInput
           style={styles.textInputStyle}
           placeholder="Search Todo by title...."
+          value={searchedValue}
           onChangeText={text => serachTodobyTitle(text)}
-          autoCorrect={false}
+          // autoCorrect={false}
+          focusable={false}
         />
         {todosList.length === 0 ? (
           <View style={styles.noTodosContainer}>
@@ -141,13 +146,9 @@ const HomeScreen = () => {
         ) : (
           <ScrollView>
             <View style={styles.todosContainer}>
-              {todosListState.length === 0
-                ? todosList.map((eachTodo, index) =>
-                    todosRenderItem(eachTodo, index),
-                  )
-                : todosListState.map((eachTodo, index) =>
-                    todosRenderItem(eachTodo, index),
-                  )}
+              {renderMainList?.map((eachTodo, index) =>
+                todosRenderItem(eachTodo, index),
+              )}
             </View>
           </ScrollView>
         )}

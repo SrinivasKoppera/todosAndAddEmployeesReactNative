@@ -3,6 +3,8 @@ export const DELETE_TODO = 'DELETE_TODO';
 export const GET_SINGLE_TODO = 'GET_SINGLE_TODO';
 export const UPDATE_TODO = 'UPDATE_TODO';
 export const SEARCH_TODO = 'SEARCH_TODO';
+export const ADD_FRUITS_INTO_LIST = 'ADD_FRUITS_INTO_LIST';
+export const ON_CHANGE_TEXT_VALUE = 'ON_CHANGE_TEXT_VALUE';
 
 export const addTodoAction = todo => {
   return {
@@ -37,5 +39,20 @@ export const searchTodoAction = text => {
   return {
     type: SEARCH_TODO,
     payload: text,
+  };
+};
+
+export const addFruitsAction = fruitsObj => {
+  return {
+    type: ADD_FRUITS_INTO_LIST,
+    payload: fruitsObj,
+  };
+};
+
+export const onChangeTextValueAction = values => {
+  // console.log('On change Actions : ', values);
+  return {
+    type: ON_CHANGE_TEXT_VALUE,
+    payload: values,
   };
 };

@@ -78,7 +78,7 @@ const ChatScreen = () => {
     return (
       <View>
         <Text style={{fontSize: 20, fontWeight: '700'}}>
-          You have Employees Data
+          You have no Employees Data
         </Text>
       </View>
     );
